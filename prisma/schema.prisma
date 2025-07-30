@@ -1,0 +1,45 @@
+// prisma/schema.prisma (النسخة الجديدة لـ MongoDB)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  type        String
+  location    String
+  description String
+  datetime    DateTime
+  latitude    Float?
+  longitude   Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([type])
+  @@index([datetime])
+}
+
+model StolenItem {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  category     String
+  brand        String
+  model        String
+  serialNumber String?
+  description  String
+  location     String
+  stolenDate   DateTime
+  images       String[]
+  status       String   @default("active") // active, recovered, closed
+  userId       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+  @@index([status])
+  @@index([userId])
+}

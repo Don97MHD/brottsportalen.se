@@ -1,0 +1,6 @@
+# public/robots.txt
+User-agent: *
+Disallow: /dashboard/
+Disallow: /stoldgods/anmal/
+
+Sitemap: https://www.brottsportalen.se/sitemap.xml
